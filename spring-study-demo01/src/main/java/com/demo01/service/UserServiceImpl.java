@@ -2,10 +2,13 @@ package com.demo01.service;
 
 import com.demo01.dao.UserDao;
 import com.demo01.entity.User;
+
+import lombok.NoArgsConstructor;
 //这里要调用到dao层的方法
 //所以这里依赖dao层
 //依赖注入主要有三种 1set注入 2.构造注入 3.spring的 自动注入
 //由于自动注入要用到注解，这里还是主要用xml配置的 所以先不写
+@NoArgsConstructor
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	//构造注入

@@ -17,11 +17,19 @@
 	    <scope>provided</scope>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<!-- spring 的框架使用的依赖包 -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context</artifactId>
 	    <version>5.0.6.RELEASE</version>
 	</dependency>
-		
+	<!-- junit 测试使用的依赖包 -->
+	<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>
+	</dependency>
   </dependencies>
 </project>
