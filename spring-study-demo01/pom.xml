@@ -23,6 +23,22 @@
 	    <artifactId>spring-context</artifactId>
 	    <version>5.0.6.RELEASE</version>
 	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>5.0.6.RELEASE</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-aspects</artifactId>
+	    <version>5.0.6.RELEASE</version>
+	</dependency>
+	
+	<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.13</version>
+	</dependency>
 	<!-- junit 测试使用的依赖包 -->
 	<!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
@@ -31,5 +47,11 @@
 	    <version>4.12</version>
 	    <scope>test</scope>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core -->
+	<!-- <dependency>
+	    <groupId>org.jboss.weld.se</groupId>
+	    <artifactId>weld-se-core</artifactId>
+	    <version>3.0.4.Final</version>
+	</dependency> -->
   </dependencies>
 </project>

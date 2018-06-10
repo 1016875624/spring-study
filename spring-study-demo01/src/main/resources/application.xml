@@ -2,10 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
 	<bean id="userDao" class="com.demo01.dao.UserDaoImpl">
 	</bean>
-	
 	
 	<bean id="userService1" class="com.demo01.service.UserServiceImpl">
 		<constructor-arg name="userDao" ref="userDao"></constructor-arg>
@@ -14,6 +12,9 @@
 		<property name="userDao">
 			<ref bean="userDao"/>
 		</property>
+	</bean>
+	
+	<bean id="user" class="com.demo01.entity.User">
 	</bean>
 	
 </beans>

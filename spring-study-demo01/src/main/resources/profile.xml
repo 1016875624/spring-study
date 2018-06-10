@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	profile="dev" >
+	<!-- 这里的dev表示整个xml文件定义的类都是在dev模式下才生效 -->
+	<!-- 这里的dev1代表的是这个beans 里面的文件 都是在dev1模式下才生效 -->
+	<beans profile="dev1">
+	</beans>
+
+	<!-- 可以有多个beans -->
+	<beans profile="dev2">
+	</beans>
+</beans>

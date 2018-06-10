@@ -21,7 +21,8 @@ public class Demo01Test {
 	@Test
 	public void get()
 	{
-		userService.get(1);
+		//userService.get(1);
+		userService.delete(1);
 	}
 	@Test
 	public void delete()

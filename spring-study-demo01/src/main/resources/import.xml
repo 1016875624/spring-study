@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 导入同级目录下的a.xml -->
+	<import resource="a.xml"/>
+	<!-- 导入javaconfig -->
+	<!-- 只要声明一个类就能导入javaconfig -->
+	<bean class="com.demo01.configur"></bean>
+	
+</beans>

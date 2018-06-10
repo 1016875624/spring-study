@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 开启注解扫描 -->
+	<context:annotation-config />
+	<!-- 开启组件扫描 -->
+	<!-- 开启组件扫描 默认开启注解扫描 -->
+	<!-- base-package 扫描的包名, 有多个包的时候 ,可以使用 , ; 和空格进行隔开 spring都支持 -->
+	<!-- .**代表不知道有多少层包 就是com.demo01和它的下层包都进行扫描 -->
+	<context:component-scan base-package="com.demo01.**"></context:component-scan>
+	
+	<context:property-placeholder location=""/>
+</beans>
