@@ -8,11 +8,9 @@ import com.aop.demo01.entity.User;
 
 public class Test {
 	public static void main(String[] args) {
-//		AnnotationConfigApplicationContext aca=new AnnotationConfigApplicationContext(SpringAopConfiguration.class);
-//		UserAspect userAspect=aca.getBean(UserAspect.class);
-//		userAspect.show(new User());
-//		System.out.println(20);
-		System.out.println(123);
+		AnnotationConfigApplicationContext aca=new AnnotationConfigApplicationContext(SpringAopConfiguration.class);
+		UserAspect userAspect=aca.getBean(UserAspect.class);
+		userAspect.show(new User());
 	}
 	
 }

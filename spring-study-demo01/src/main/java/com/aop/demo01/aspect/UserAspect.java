@@ -1,5 +1,6 @@
 package com.aop.demo01.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -11,26 +12,36 @@ import com.aop.demo01.configuration.SpringAopConfiguration;
 import com.aop.demo01.entity.User;
 
 //@Aspect
-//@Component
+@Component
 public class UserAspect {
-	public void show(User user) {
-		System.out.println(user);
-	}
-	@Pointcut("execution(* UserAspect.show(..) ) && args(User user)")
-	private void show() {}
 	
-	@Before("show()")
-	private void name(User user) {
+	
+	@Pointcut("execution(* show(com.aop.demo01.entity.User) ) && args(user)")
+	public void ss(User user) {}
+	
+	@Before("ss(user)")
+	public void name(User user) {
 		user.setId(1);
 		user.setName("123");
 		user.setSex("男");
 		System.out.println("before show");
 	}
 	
+	@After("ss(user)")
+	public void aa(User user) {
+		user.setId(1);
+		user.setName("123");
+		user.setSex("男");
+		System.out.println("before show");
+	}
+	public void show(User user) {
+		System.out.println(user);
+	}
 	public static void main(String[] args) {
 		ApplicationContext aca=new AnnotationConfigApplicationContext(SpringAopConfiguration.class);
 		UserAspect userAspect=aca.getBean(UserAspect.class);
-		userAspect.show(new User());
+		User user=aca.getBean(User.class);
+		userAspect.show(user);
 	}
 	
 }

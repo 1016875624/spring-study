@@ -6,6 +6,14 @@
 
 此文档主要用来介绍一些有用的spring的特性，以便以后的扩展，这里只做简单的介绍，详细的请根据自己的需求进行百度搜索。
 
+## Spring 的一些坑
+
+首先 **扫描本级包以及下面的所有子包**的写法是 **..*** 而不是 .**
+
+自动扫描包 basePackage =""
+
+只要写到某个包就好了,自动扫描本级及以下的所有包也就是不用写.* 也不用写.** ..*之类的 直接写到包名就好了
+
 ## IOC、DI(控制反转 依赖注入)
 
 spring in action书上第 p27
@@ -608,6 +616,16 @@ T(java.lang.Math).PI 获取math的pi值
 
 spring in action p144
 
+| 注解           | 通知                               |
+| -------------- | ---------------------------------- |
+| args()         | 匹配有某个参数的方法               |
+| @args()        | 匹配参数上有某个注解的方法         |
+| @AfterThrowing | 通知方法会在目标方法抛出异常后调用 |
+| @Around        | 通知方法会将目标方法封装起来       |
+| @Before        | 通知方法会在目标方法调用之前执行   |
+
+
+
 ![切点表达式](img\切点表达式.jpg)
 
 ## 五大切面的通知
@@ -658,6 +676,95 @@ spring in action p152
 
 后面我们要利用这个参数进行操作，也就是我们通过这个参数可以拦截方法的执行，它调用 pjp.proceed();这个函数才能使目标方法执行，不然的话目标方法是不执行的
 
+### 有关JoinPoint的介绍
+
+```java
+public interface JoinPoint {  
+    String toString();         //连接点所在位置的相关信息  
+    String toShortString();     //连接点所在位置的简短相关信息  
+    String toLongString();     //连接点所在位置的全部相关信息  
+    Object getThis();         //返回AOP代理对象  
+    Object getTarget();       //返回目标对象  
+    Object[] getArgs();       //返回被通知方法参数列表  
+    Signature getSignature();  //返回当前连接点签名  
+    SourceLocation getSourceLocation();//返回连接点方法所在类文件中的位置  
+    String getKind();        //连接点类型  
+    StaticPart getStaticPart(); //返回连接点静态部分  
+}  
+```
+
+### 有关ProceedingJoinPoint的介绍
+
+```java
+public interface ProceedingJoinPoint extends JoinPoint {  
+    public Object proceed() throws Throwable;  
+    public Object proceed(Object[] args) throws Throwable;  
+}
+```
+
+### JoinPoint.StaticPart的介绍
+
+```java
+public interface StaticPart {  
+    Signature getSignature();    //返回当前连接点签名  
+    String getKind();          //连接点类型  
+    int getId();               //唯一标识  
+    String toString();         //连接点所在位置的相关信息  
+    String toShortString();     //连接点所在位置的简短相关信息  
+    String toLongString();     //连接点所在位置的全部相关信息  
+}  
+```
+
+在一些普通的通知上可以使用JoinPoint 这个参数 ，当然也可以不用，看你的应用场景决定
+
+```java
+@Before(value="execution(* sayBefore(*))")  
+public void before(JoinPoint jp) {}  
+   
+@Before(value="execution(* sayBefore(*))")  
+public void before(JoinPoint.StaticPart jp) {}  
+```
+
+在环绕通知@Around中**必须**要有 **ProceedingJoinPoint** 这个参数
+
+获取执行的方法名称
+
+getSinature().getName()这样就可以获取方法名称了
+
+
+
+## 一些常用的切点写法
+
+```java
+	//所有返回值 无论是不是公有方法 任意参数 的方法名为show的 切点
+	@Pointcut("execution( * show(..) )")
+	public void show() {}
+	//所有方法都执行这个函数
+	@Pointcut("execution(* *(..) )")
+	public void allMethod() {}
+	//含有参数名为user 且类型为 User 的方法执行
+	@Pointcut("args(user)")
+	public void args(User user) {}
+	
+	//含有某个注释的方法执行此方法
+	@Pointcut("@annotation(dateTimeFormat)")
+	public void annotation(DateTimeFormat dateTimeFormat) {}
+	//所有公有方法
+	@Pointcut("execution( public * *(..) )")
+	public void allPublic() {}
+	
+	//在com.aop.demo01.service 包范围内的所有方法
+	//@Pointcut("within(com.aop.demo01.service.*)")
+	//在demo01这个包及所有子包的所有方法
+	@Pointcut("within(com.aop.demo01..*)")
+	public void withinInService() {}
+	
+	@Pointcut("within(com.aop.demo01.**)")
+	public void withinInDemo01() {}	
+```
+
+
+
 ## SpringMVC 最新的配置方式
 
 spring in action p177
@@ -669,4 +776,30 @@ spring in action p177
 ![SpringMVC注解配置](img\SpringMVC注解配置.png)
 
 这里就是基本的配置
+
+### 最小可用的mvc配置
+
+![最小可用的mvc配置](img\最小可用的mvc配置.png)
+
+### 基本的控制器
+
+```java
+@Controller
+public class HomeController{
+    //由于这里的类没有加上@RequestMapping 注解 所以访问这里的页面就只需要访问/就可以访问home页面了
+    //如果类有@RequestMapping 注解 访问的路径就是 /类的映射/方法的映射 才能访问得到
+    @RequestMapping(value="/",method=GET)
+    public String home(){
+        return "home";
+    }
+}
+```
+
+这上面的控制器是在设置**首页**也就是访问localhost:8080/项目名 就可以访问到 **/WEB-INF/views/home.jsp** 这个页面
+
+### 测试控制器
+
+![测试控制器](K:\gitRepository\spring-study\img\测试控制器.png)
+
+
 

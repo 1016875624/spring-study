@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>spring-study-demo01</module>
+  	<module>spring-mvc-study-demo01</module>
   </modules>
 </project>

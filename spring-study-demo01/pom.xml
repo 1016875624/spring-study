@@ -34,11 +34,11 @@
 	    <version>5.0.6.RELEASE</version>
 	</dependency>
 	
-	<dependency>
+	<!-- <dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.13</version>
-	</dependency>
+	</dependency> -->
 	<!-- junit 测试使用的依赖包 -->
 	<!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
